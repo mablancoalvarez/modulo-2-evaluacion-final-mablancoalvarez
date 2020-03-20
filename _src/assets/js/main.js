@@ -19,7 +19,6 @@ function loadSeries() {
             movieList = data;
             //  console.log(data);
             renderMovies(movieList);
-            renderFavourites(selectedMovies)
         });
 }
 // 2-show movies
@@ -68,29 +67,24 @@ function getMovieObject(id) {
 
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
-    const perro = evt.currentTarget;
-    perro.setAttribute('class','switch')
-
-    selectedMovies.push(selected);
+    const switchColor = evt.currentTarget;
+    switchColor.setAttribute('class','switch')
+    const object = getMovieObject(selected)
+    selectedMovies.push(object.show);
     setLocalStorage();
     renderFavourites(selectedMovies);
-    const object = getMovieObject(selected)
     console.log(movieList)
 }
-
-
 
 
 function renderFavourites(favArr) {
     console.log(selectedMovies)
     ulFav.innerHTML = '';
     for (let favourite of favArr) {
-        const object = getMovieObject(favourite);
-        if (favourite == object.show.id) {
-            ulFav.innerHTML += `<li id='${object.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${object.show.image.medium} alt=${object.show.name}></div>
-    <span>${object.show.name}</span></li>`;
+            ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
+    <span>${favourite.name}</span></li>`;
   
-        }
+        
     }
 }
 
@@ -99,4 +93,4 @@ function renderFavourites(favArr) {
 button.addEventListener('click', loadSeries);
 
 
-loadSeries()
+renderFavourites(selectedMovies)
