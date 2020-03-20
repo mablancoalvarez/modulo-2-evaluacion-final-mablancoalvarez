@@ -62,18 +62,23 @@ function readLocalStorage() {
 
 //me quedo con el objeto
 function getMovieObject(id) {
-    return movieList.find(movie => movie.id === id)
+    return movieList.find(movie => movie.show.id === parseInt(id))
 }
 
 
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
+    const perro = evt.currentTarget;
+    perro.setAttribute('class','switch')
+
     selectedMovies.push(selected);
     setLocalStorage();
-    //renderFavourites(selectedMovies);
+    renderFavourites(selectedMovies);
     const object = getMovieObject(selected)
     console.log(movieList)
 }
+
+
 
 
 function renderFavourites(favArr) {
@@ -81,10 +86,10 @@ function renderFavourites(favArr) {
     ulFav.innerHTML = '';
     for (let favourite of favArr) {
         const object = getMovieObject(favourite);
-        if (favourite === object.id) {
+        if (favourite == object.show.id) {
             ulFav.innerHTML += `<li id='${object.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${object.show.image.medium} alt=${object.show.name}></div>
     <span>${object.show.name}</span></li>`;
-    console.log (favourite)
+  
         }
     }
 }
