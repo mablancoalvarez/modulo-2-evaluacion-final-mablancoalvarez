@@ -14,18 +14,28 @@ flex-direction: column;
 
 }
 .main__results {
-	width: 80%;
+	margin-right: 0px;
+	margin-left: 100px;
 	display:flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
 	align-items: flex-end;
-
-	
-	padding-left:40px
-	
+	padding-left:40px;
 
 }
+
+
+ul{
+	list-style-type: none;
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-end;
+	margin-right:0;
+
+  }
 aside{
 	position: fixed;
 	width: 200px;

@@ -7,6 +7,7 @@ const img = document.querySelector('.imgElem');
 const ulElement = document.querySelector('#results');
 
 let movieList = null;
+const selectedMovies = readLocalStorage();
 
 // 1- Connect to Api
 function loadSeries() {
@@ -29,9 +30,41 @@ function renderMovies(movieArr) {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt=${movie.show.name}></div>
             <span>${movie.show.name}</span></li>`;
         }
+        addListeners();
     }
+
 }
 
+function addListeners() {
+    const liList = document.querySelectorAll('.movies-list__item');
+    for (let li of liList) {
+        li.addEventListener('click', selectMovie);
+    }
+}
+// LocalStorage seteo
+function setLocalStorage() {
+    localStorage.setItem('movieInfo', JSON.stringify(selectedMovies))
+}
+// LocalStorage muestro
+
+function readLocalStorage() {
+
+    let localInfo = JSON.parse(localStorage.getItem ('movieInfo'))
+    if (localInfo !== null){
+        return localInfo
+    } else {
+        return localInfo = []; 
+    }
+
+    }
+
+    function selectMovie(evt) {
+        const selected = evt.currentTarget.id;
+        console.log('hola');
+        selectedMovies.push(selected);
+        readLocalStorage()
+
+    }
 
 
-button.addEventListener('click', loadSeries);
+    button.addEventListener('click', loadSeries);
