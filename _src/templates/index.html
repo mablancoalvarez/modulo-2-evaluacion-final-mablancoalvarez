@@ -13,22 +13,22 @@
   <div class="page">
     <header class="page__header">
       <h1 class="title">Buscador de series</h1>
+      <form class="main__search--form" id="form">
+        <label for="search"></label>
+        <input type="text" name="input" id="input-search">
+        <button type="button" id="button-search" class="button__search--submit">Buscar</button>
     </header>
-    <main class="page__main">
-      <section class="main__search">
-        <form class="main__search--form" id="form">
-          <label for="search"></label>
-          <input type="text" name="input" id="input-search">
-          <button type="button" id="button-search" class="button__search--submit">Buscar</button>
-      </section>
-      <section class ="main__results">
+      <main class="main__results">
         <ul class="result__list" id="results"></ul>
-
-      </section>
-
     </main>
+    <aside>
+      <h2>Favourites movies</h2>
+      <ul class="favourites">
+      <!--favoritos-->
+      </ul>
+    </aside>
   </div>
-  <script type="text/javascript"src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
 
 </html>

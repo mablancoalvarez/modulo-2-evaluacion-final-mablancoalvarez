@@ -22,20 +22,15 @@ function loadSeries() {
 // 2-show movies
 function renderMovies(movieArr) {
     for (let movie of movieArr) {
-
-        ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${movie.show.image.medium} alt=${movie.show.name}></div>
+        if (movie.show.image !== null) {
+            ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${movie.show.image.medium} alt=${movie.show.name}></div>
     <span>${movie.show.name}</span></li>`;
-        // console.log(movie);
-
-        // if (img !== null) {
-        //     img.src = movie.show.image.medium || movie.show.image.original;
-        // } else {
-        //     img.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
-        // }
-
+        } else {
+            ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt=${movie.show.name}></div>
+            <span>${movie.show.name}</span></li>`;
+        }
     }
 }
-
 
 
 
