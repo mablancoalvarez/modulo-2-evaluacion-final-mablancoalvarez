@@ -105,25 +105,27 @@ function renderFavourites(favArr) {
             ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><div class='movies-list__item-info'><i class='far fa-times-circle'></i><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
             <span>${favourite.name}</span></li>`;
         }
+        addFavouriteListeners ()
     }
 
 
-//     function addFavouriteListeners (){
-//         const buttonList = document.querySelectorAll('button');
-//     for ( let button of buttonList ){
-//     button.addEventListener('click', removeMovie)
+    function addFavouriteListeners (){
+        const buttonList = document.querySelectorAll('i');
+    for ( let i of buttonList ){
+    i.addEventListener('click', removeMovie)
     
-//     }
-//     }
-//     function removeMovie (evt){const elemId = evt.currentTarget.parentElement.id;
-//     // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
+    }
+    }
+    function removeMovie (evt){
+        const elemId = evt.currentTarget.parentElement.id;
+    // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
 
-//     const elemIndex =  selectedMovies.indexOf(elemId);
+    const elemIndex =  selectedMovies.indexOf(elemId);
 
-//     selectedMovies.splice(elemIndex,1);
-//     setLocalStorage();
-//     renderFavourites(selectedMovies);
-// }
+    selectedMovies.splice(elemIndex,1);
+    setLocalStorage();
+    renderFavourites(selectedMovies);
+}
 
 
 
