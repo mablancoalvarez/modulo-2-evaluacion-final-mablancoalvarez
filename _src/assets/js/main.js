@@ -90,6 +90,10 @@ function selectMovie(evt) {
 
     setLocalStorage();
     renderFavourites(selectedMovies);
+//     if (selectedMovies.indexOf(selected) === -1) {
+//     renderFavourites(selectedMovies);
+// } else {
+//     alert('Esta serie ya esxiste en tus favs')
 
     console.log(movieList)
 }
@@ -99,12 +103,14 @@ function renderFavourites(favArr) {
     console.log(selectedMovies)
     ulFav.innerHTML = '';
     for (let favourite of favArr) {
-        // const object = getMovieObject(favArr)
-        // if (favArr = object.show.id) {
+        
+         
 
-            ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><div class='movies-list__item-info'><i class='far fa-times-circle'></i><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
+            ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><i class='far fa-times-circle'></i><div class='movies-list__item-info'><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
             <span>${favourite.name}</span></li>`;
-        }
+        
+    } 
+    
         addFavouriteListeners ()
     }
 
@@ -116,6 +122,7 @@ function renderFavourites(favArr) {
     
     }
     }
+
     function removeMovie (evt){
         const elemId = evt.currentTarget.parentElement.id;
     // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
