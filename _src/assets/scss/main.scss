@@ -20,6 +20,13 @@ body {
     color:white;
   }
 }
+  .button{
+  border-bottom:1px solid grey;
+  padding-left:20px;
+  padding-top:20px
+
+  }
+
 .wrapper {
   height: 100%;
 
@@ -47,9 +54,10 @@ body {
       justify-content: space-around;
       align-items: flex-end;
       margin-right: 0;
+      font-family: 'Montserrat', sans-serif;
       .movies-list__item {
       
-          color: grey;
+          color: black;
           cursor: pointer;
           -webkit-box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.1);
           box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.1);
@@ -57,8 +65,9 @@ body {
           border-radius: 10px;
           margin-bottom: 15px;
           cursor: pointer;
-          background: white
-        
+          background: white;
+          font-family: 'Montserrat', sans-serif;
+
       }
     
     }
@@ -82,10 +91,16 @@ body {
     font-size: 18px;
     text-align: center;
   }
+  
   aside li{
     list-style-type: none;
+    cursor: pointer;
     
+    i {
+        font-weight: 800;
+    }
   }
+ 
    div span {
      display:block;
      font-family:'Montserrat', sans-serif;
@@ -103,5 +118,5 @@ body {
           border-radius: 10px;
           margin-bottom: 15px;
           cursor: pointer;
-          background:rgb(150, 151, 154)
+          background:black;
 }

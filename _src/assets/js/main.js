@@ -149,13 +149,16 @@ function addFavouriteListeners() {
 
 function removeMovie(evt) {
     const elemId = evt.currentTarget.parentElement.id;
+    
     // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
 
     const elemIndex = selectedMovies.indexOf(elemId);
 
     selectedMovies.splice(elemIndex, 1);
+
     setLocalStorage();
     renderFavourites(selectedMovies);
+    
 }
 
 
