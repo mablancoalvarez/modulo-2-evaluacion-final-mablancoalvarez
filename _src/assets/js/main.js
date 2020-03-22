@@ -66,70 +66,94 @@ function getMovieObject(id) {
     return movieList.find(movie => movie.show.id === parseInt(id))
 }
 
+
+
 //función que selecciona la película favorita
-//me quedo con el objeto , no con el id de la película seleccionada
-//y lo pusheo al array de favoritos
-//pinto los favoritos
-// function selectMovie(evt) {
-//     const selected = evt.currentTarget.id;
-//     const switchColor = evt.currentTarget;
-//     switchColor.setAttribute('class','switch')
-//     const object = getMovieObject(selected)
-//     selectedMovies.push(object.show);
-//     setLocalStorage();
-//     renderFavourites(selectedMovies);
-//     console.log(movieList)
-// }
+
 
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
     const switchColor = evt.currentTarget;
-    switchColor.setAttribute('class','switch')
+    switchColor.setAttribute('class', 'switch')
     const object = getMovieObject(selected)
-    selectedMovies.push(object.show);
+    /* Con esto comparamos si ya tenemos la serie seleccionada  parseando los dos valores*/
+    const findMovie = selectedMovies.find(movies => parseInt(movies.id) === parseInt(selected));
+    if (findMovie === null || findMovie === undefined) {
 
-    setLocalStorage();
-    renderFavourites(selectedMovies);
-//     if (selectedMovies.indexOf(selected) === -1) {
-//     renderFavourites(selectedMovies);
-// } else {
-//     alert('Esta serie ya esxiste en tus favs')
+        selectedMovies.push(object.show);
+        setLocalStorage();
+        renderFavourites(selectedMovies);
+    } else {
+        alert('Esta serie ya está en favoritos')
+    }
 
-    console.log(movieList)
+}
+
+function renderFavourites(favArr) {
+
+    ulFav.innerHTML = '';
+    for (let favourite of favArr) {
+        const li = document.createElement('li');
+        const i = document.createElement('i');
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        const span = document.createElement('span');
+        const text = document.createTextNode(favourite.name);
+
+        //icono de eliminar
+        i.setAttribute('class', 'far fa-times-circle');
+
+        //Imagen de la serie
+        img.setAttribute('class', 'imgElem');
+        img.setAttribute('alt', favourite.name);
+        if (favourite.image !== null
+            && favourite.image !== undefined
+            && favourite.image !== '') {
+            img.setAttribute('src', favourite.image.medium);
+        }
+        else img.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
+
+        //Nombre de la imagen
+        span.appendChild(text);
+
+
+        //contenedor de la imagen
+        div.setAttribute('class', 'movies-list__item-info');
+        div.appendChild(img);
+        div.appendChild(span);
+
+        //elemento de la lista
+        li.setAttribute('id', favourite.id);
+        li.setAttribute('class', 'movies-list__item');
+        li.appendChild(i);
+        li.appendChild(div);
+        ulFav.appendChild(li);
+
+
+
+        // ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><i class='far fa-times-circle'></i><div class='movies-list__item-info'><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
+        // <span>${favourite.name}</span></li>`;
+    }
+
+    addFavouriteListeners()
 }
 
 
-function renderFavourites(favArr) {
-    console.log(selectedMovies)
-    ulFav.innerHTML = '';
-    for (let favourite of favArr) {
-        
-         
+function addFavouriteListeners() {
+    const buttonList = document.querySelectorAll('i');
+    for (let i of buttonList) {
+        i.addEventListener('click', removeMovie)
 
-            ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><i class='far fa-times-circle'></i><div class='movies-list__item-info'><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
-            <span>${favourite.name}</span></li>`;
-        
-    } 
-    
-        addFavouriteListeners ()
     }
+}
 
-
-    function addFavouriteListeners (){
-        const buttonList = document.querySelectorAll('i');
-    for ( let i of buttonList ){
-    i.addEventListener('click', removeMovie)
-    
-    }
-    }
-
-    function removeMovie (evt){
-        const elemId = evt.currentTarget.parentElement.id;
+function removeMovie(evt) {
+    const elemId = evt.currentTarget.parentElement.id;
     // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
 
-    const elemIndex =  selectedMovies.indexOf(elemId);
+    const elemIndex = selectedMovies.indexOf(elemId);
 
-    selectedMovies.splice(elemIndex,1);
+    selectedMovies.splice(elemIndex, 1);
     setLocalStorage();
     renderFavourites(selectedMovies);
 }
