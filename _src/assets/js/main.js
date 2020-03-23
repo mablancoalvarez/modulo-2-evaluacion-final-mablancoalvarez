@@ -17,14 +17,11 @@ function loadSeries() {
         .then(response => response.json())
         .then(data => {
             movieList = data;
-            //  console.log(data);
             renderMovies(movieList);
-            // Esto me pintara los datos
         });
 }
 
-// 2-show movies me mostrara los resultados
-
+// 2-show movies 
 function renderMovies(movieArr) {
     for (let movie of movieArr) {
         if (movie.show.image !== null) {
@@ -37,14 +34,14 @@ function renderMovies(movieArr) {
         addListeners();
     }
 }
-// Añado los listeners a los li y seleccionaran la pelicula favorita
+// Add listeners to liList
 function addListeners() {
     const liList = document.querySelectorAll('.movies-list__item');
     for (let li of liList) {
         li.addEventListener('click', selectMovie);
     }
 }
-// LocalStorage seteo
+// LocalStorage set
 
 function setLocalStorage() {
     localStorage.setItem('movieInfo', JSON.stringify(selectedMovies))
@@ -52,46 +49,37 @@ function setLocalStorage() {
 // LocalStorage reading
 
 function readLocalStorage() {
-
     let localInfo = JSON.parse(localStorage.getItem('movieInfo'))
     if (localInfo !== null) {
         return localInfo
     } else {
         return localInfo = [];
     }
-
 }
-
-// me quedo con el objeto
+// get Object
 function getMovieObject(id) {
     return movieList.find(movie => movie.show.id === parseInt(id))
 }
 
-
-
-//función que selecciona la película favorita
-
-
+// Favourite Movie function
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
     const switchColor = evt.currentTarget;
     switchColor.setAttribute('class', 'switch')
     const object = getMovieObject(selected);
-    /* Con esto comparamos si ya tenemos la serie seleccionada  parseando los dos valores*/
+    /* Compare ids of selectedMovies with general data*/
     const findMovie = selectedMovies.find(movies => parseInt(movies.id) === parseInt(selected));
     if (findMovie === null || findMovie === undefined) {
-
         selectedMovies.push(object.show);
         setLocalStorage();
         renderFavourites(selectedMovies);
     } else {
         alert('Esta serie ya está en favoritos')
     }
-    
 }
 
+// Show in document favourite Show
 function renderFavourites(favArr) {
-
     ulFav.innerHTML = '';
     for (let favourite of favArr) {
         const li = document.createElement('li');
@@ -101,10 +89,10 @@ function renderFavourites(favArr) {
         const span = document.createElement('span');
         const text = document.createTextNode(favourite.name);
 
-        //icono de eliminar
+        //Delete icon
         i.setAttribute('class', 'far fa-times-circle');
 
-        //Imagen de la serie
+        //TV image
         img.setAttribute('class', 'imgElem');
         img.setAttribute('alt', favourite.name);
         if (favourite.image !== null
@@ -114,67 +102,52 @@ function renderFavourites(favArr) {
         }
         else img.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
 
-        //Nombre de la imagen
+        //Image name
         span.appendChild(text);
 
 
-        //contenedor de la imagen
+        //Container of img
         div.setAttribute('class', 'movies-list__item-info');
         div.appendChild(img);
         div.appendChild(span);
 
-        //elemento de la lista
+        //Element of List
         li.setAttribute('id', favourite.id);
         li.setAttribute('class', 'movies-list__itemFavourites');
         li.appendChild(i);
         li.appendChild(div);
         ulFav.appendChild(li);
-
     }
-
     addFavouriteListeners()
 }
+
+// Add icon listeners & remove show selected
 
 function addFavouriteListeners() {
     const buttonList = document.querySelectorAll('i');
     for (let i of buttonList) {
         i.addEventListener('click', removeMovie)
-
     }
 }
 
 function removeMovie(evt) {
-   
-  
     const elemClicked = event.currentTarget.parentElement;
     const elemId = elemClicked.getAttribute('id');
     const searchCorrectId = selectedMovies.find(item => item.id == (Number(elemId)));
     let fav = selectedMovies.indexOf(searchCorrectId);
     selectedMovies.splice(fav, 1);
     // const ulElementChild = document.querySelectorAll('.movies-list__item')
-    for ( let element of ulElementChild){
-    if (elemId === element.id ){
-        element.classList.remove('switch');
-        element.classList.add('white');
+    for (let element of ulElementChild) {
+        if (elemId === element.id) {
+            element.classList.remove('switch');
+            element.classList.add('white');
+        }
     }
-}
-
-    // if (selectedMovies.indexOf(searchCorrectId)) {
-    //     const liList = document.querySelectorAll ('.movies-list__item' );
-    //     for (let li of liList) {
-    //         li.setAttribute('class', 'white');
-    //     }
-    // }
-
     setLocalStorage();
     renderFavourites(selectedMovies);
-    
-
-    
 }
 
 
 button.addEventListener('click', loadSeries);
-
 
 renderFavourites(selectedMovies)
