@@ -7,7 +7,7 @@ We will save each of these movies in Local Storage so we can keep watching them 
 Finally we can remove the movie we want from our list of favorites.
 
 
-## Tools used:hammer:
+## Tools.  used:   hammer:
 
 
 The first step has been to use the Adalab Web Starter Kit tool through which we automated many of the tasks. For example having a server permanently connected to be able to visualize the changes. For this we installed node.
@@ -16,7 +16,7 @@ I have also used HTML5 , CS3 , Saas and Javascript technology.
 
 
 
-## Project structure :open_file_folder:
+## Project structure   :open_file_folder:
 
 The folder structure looks like this:
 
@@ -33,5 +33,7 @@ The folder structure looks like this:
    |
    `- templates
       `- partials
+      
+      
 
-## Created by : mablancoalvarez :bulb:
+## Created by : mablancoalvarez  :bulb:
