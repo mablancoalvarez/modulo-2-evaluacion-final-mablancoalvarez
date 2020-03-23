@@ -22,13 +22,14 @@ function loadSeries() {
             // Esto me pintara los datos
         });
 }
+
 // 2-show movies me mostrara los resultados
 
 function renderMovies(movieArr) {
     for (let movie of movieArr) {
         if (movie.show.image !== null) {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${movie.show.image.medium} alt=${movie.show.name}></div>
-    <span>${movie.show.name}</span></li>`;
+            <span>${movie.show.name}</span></li>`;
         } else {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt=${movie.show.name}></div>
             <span>${movie.show.name}</span></li>`;
@@ -75,7 +76,7 @@ function selectMovie(evt) {
     const selected = evt.currentTarget.id;
     const switchColor = evt.currentTarget;
     switchColor.setAttribute('class', 'switch')
-    const object = getMovieObject(selected)
+    const object = getMovieObject(selected);
     /* Con esto comparamos si ya tenemos la serie seleccionada  parseando los dos valores*/
     const findMovie = selectedMovies.find(movies => parseInt(movies.id) === parseInt(selected));
     if (findMovie === null || findMovie === undefined) {
@@ -129,10 +130,6 @@ function renderFavourites(favArr) {
         li.appendChild(div);
         ulFav.appendChild(li);
 
-
-
-        // ulFav.innerHTML += `<li id='${favourite.id}' class='movies-list__item'><i class='far fa-times-circle'></i><div class='movies-list__item-info'><img class="imgElem" src=${favourite.image.medium} alt=${favourite.name}></div>
-        // <span>${favourite.name}</span></li>`;
     }
 
     addFavouriteListeners()
@@ -147,19 +144,27 @@ function addFavouriteListeners() {
     }
 }
 
+
 function removeMovie(evt) {
-    const elemId = evt.currentTarget.parentElement.id;
-    
-    // Esto se hace porque el currentt es el button y hay que llegar al padre que es el LI
+    //  selectedMovies.find(movies => parseInt(movies.id) === parseInt(elemId));
+    // const elemId = evt.currentTarget.parentElement.id;
+    // const elemIndex = selectedMovies.indexOf(elemId);
+    // selectedMovies.splice(elemIndex, 1);
 
-    const elemIndex = selectedMovies.indexOf(elemId);
+    // if (selectedMovies.find(movies => parseInt(movies.id) === parseInt(favourite.id))){
+    //     removeMovie();
+    // }
+    const elemClicked = event.currentTarget.parentElement;
+    const elemId = elemClicked.getAttribute('id');
+    const searchCorrectId = selectedMovies.find(item => item.id == (Number(elemId)));
+    let fav = selectedMovies.indexOf(searchCorrectId);
+    selectedMovies.splice(fav, 1);
 
-    selectedMovies.splice(elemIndex, 1);
 
     setLocalStorage();
     renderFavourites(selectedMovies);
-    
 }
+
 
 
 
