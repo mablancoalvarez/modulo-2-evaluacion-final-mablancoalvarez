@@ -6,7 +6,7 @@ const button = document.querySelector('#button-search');
 const img = document.querySelector('.imgElem');
 const ulElement = document.querySelector('#results');
 const ulFav = document.querySelector('.favourites');
-
+const ulElementChild = document.querySelectorAll('.movies-list__item-info')
 let movieList = null;
 const selectedMovies = readLocalStorage();
 
@@ -87,7 +87,7 @@ function selectMovie(evt) {
     } else {
         alert('Esta serie ya está en favoritos')
     }
-
+    
 }
 
 function renderFavourites(favArr) {
@@ -125,7 +125,7 @@ function renderFavourites(favArr) {
 
         //elemento de la lista
         li.setAttribute('id', favourite.id);
-        li.setAttribute('class', 'movies-list__item');
+        li.setAttribute('class', 'movies-list__itemFavourites');
         li.appendChild(i);
         li.appendChild(div);
         ulFav.appendChild(li);
@@ -135,7 +135,6 @@ function renderFavourites(favArr) {
     addFavouriteListeners()
 }
 
-
 function addFavouriteListeners() {
     const buttonList = document.querySelectorAll('i');
     for (let i of buttonList) {
@@ -144,28 +143,35 @@ function addFavouriteListeners() {
     }
 }
 
-
 function removeMovie(evt) {
-    //  selectedMovies.find(movies => parseInt(movies.id) === parseInt(elemId));
-    // const elemId = evt.currentTarget.parentElement.id;
-    // const elemIndex = selectedMovies.indexOf(elemId);
-    // selectedMovies.splice(elemIndex, 1);
-
-    // if (selectedMovies.find(movies => parseInt(movies.id) === parseInt(favourite.id))){
-    //     removeMovie();
-    // }
+   
+  
     const elemClicked = event.currentTarget.parentElement;
     const elemId = elemClicked.getAttribute('id');
     const searchCorrectId = selectedMovies.find(item => item.id == (Number(elemId)));
     let fav = selectedMovies.indexOf(searchCorrectId);
     selectedMovies.splice(fav, 1);
+    // const ulElementChild = document.querySelectorAll('.movies-list__item')
+    for ( let element of ulElementChild){
+    if (elemId === element.id ){
+        element.classList.remove('switch');
+        element.classList.add('white');
+    }
+}
 
+    // if (selectedMovies.indexOf(searchCorrectId)) {
+    //     const liList = document.querySelectorAll ('.movies-list__item' );
+    //     for (let li of liList) {
+    //         li.setAttribute('class', 'white');
+    //     }
+    // }
 
     setLocalStorage();
     renderFavourites(selectedMovies);
+    
+
+    
 }
-
-
 
 
 button.addEventListener('click', loadSeries);
