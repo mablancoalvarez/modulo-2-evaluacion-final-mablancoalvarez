@@ -18,11 +18,9 @@ I have also used HTML5 , CS3 , Saas and Javascript technology.
 
 ## Project structure :open_file_folder:
 
-
 The folder structure looks like this:
 
-```
-/
+
 `- _src
    |- api
    |  |- data.json // para crearnos un servidor de datos local
@@ -36,7 +34,4 @@ The folder structure looks like this:
    `- templates
       `- partials
 
-
 ## Created by : mablancoalvarez :bulb:
-
-
