@@ -1,5 +1,5 @@
 
-# Cool TV SHOW :movie_camera::mag_right:
+# Cool TV SHOW :movie_camera: :mag_right:
 
 functionalities
 
