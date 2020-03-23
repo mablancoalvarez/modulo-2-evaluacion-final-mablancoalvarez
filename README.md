@@ -10,7 +10,7 @@ functionalities
 5.Finally we can remove the movie we want from our favorites list.
 
 
-## Requirements
+## Requirements :rocket:
 
 Pre-install Node.js and Gulp
 
@@ -19,7 +19,7 @@ Clone the repository on your computer.
 Enter in your terminal the command npm install to install the Gulp dependencies.
 
 
-## Tools.  used:   hammer:
+## Tools. :hammer:
 
 
 The first step has been to use the Adalab Web Starter Kit tool through which we automated many of the tasks. For example having a server permanently connected to be able to visualize the changes. For this we installed node.
