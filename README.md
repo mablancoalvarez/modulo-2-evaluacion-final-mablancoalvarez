@@ -11,7 +11,9 @@ functionalities
 
 4.We will save each of these movies in Local Storage so we can keep watching them without refreshing the page.
 
-5.Finally we can remove the movie we want from our favorites list.
+5.If we've bookmarked a film that we've already selected, we'll have an alert to let us know.
+
+6.Finally we can remove the movie we want from our favorites list.
 
 
 ## Requirements :rocket:
