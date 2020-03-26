@@ -22,24 +22,7 @@ function loadSeries() {
         });
 }
 
-function showFavourite (){
 
-    const buttonFav = document.createElement('button');
-    const text = document.createTextNode('fav');
-     buttonFav.appendChild(text);
-    container.appendChild(buttonFav);
-
-    buttonFav.addEventListener('click', paintFavourite);
-
-}
-
-function paintFavourite (){
-
-for ( let favourite of selectedMovies){
-    console.log(favourite.name);
-}
-
-}
 
 
 // 2-show movies 
@@ -47,14 +30,12 @@ function renderMovies(movieArr) {
     for (let movie of movieArr) {
         if (movie.show.image !== null) {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${movie.show.image.medium} alt=${movie.show.name}></div>
-            <span>${movie.show.name}</span>
-            <span>${movie.show.schedule.days}</span></li>`;
+            <span>${movie.show.name}</span></li>`;
         } else {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt=${movie.show.name}></div>
-            <span>${movie.show.name}</span>
-            <span>${movie.show.schedule.days}</span></li>`;
+            <span>${movie.show.name}</span></li>`;
         }
-        // addListeners();
+        addListeners();
     }
 }
 // Add listeners to liList
@@ -168,6 +149,11 @@ function removeMovie(evt) {
     }
     setLocalStorage();
     renderFavourites(selectedMovies);
+    const element = document.getElementById(elemId);
+    element.classList.remove('black');
+    element.classList.add('white');
+
+
 }
 
 button.addEventListener('click', loadSeries);
