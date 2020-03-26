@@ -7,6 +7,7 @@ const img = document.querySelector('.imgElem');
 const ulElement = document.querySelector('#results');
 const ulFav = document.querySelector('.favourites');
 const ulElementChild = document.querySelectorAll('.movies-list__item-info')
+const container = document.querySelector ('.page__header');
 let movieList = null;
 const selectedMovies = readLocalStorage();
 
@@ -17,21 +18,43 @@ function loadSeries() {
         .then(response => response.json())
         .then(data => {
             movieList = data;
-            renderMovies(movieList);
+            renderMovies(movieList); 
         });
 }
+
+function showFavourite (){
+
+    const buttonFav = document.createElement('button');
+    const text = document.createTextNode('fav');
+     buttonFav.appendChild(text);
+    container.appendChild(buttonFav);
+
+    buttonFav.addEventListener('click', paintFavourite);
+
+}
+
+function paintFavourite (){
+
+for ( let favourite of selectedMovies){
+    console.log(favourite.name);
+}
+
+}
+
 
 // 2-show movies 
 function renderMovies(movieArr) {
     for (let movie of movieArr) {
         if (movie.show.image !== null) {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src=${movie.show.image.medium} alt=${movie.show.name}></div>
-            <span>${movie.show.name}</span></li>`;
+            <span>${movie.show.name}</span>
+            <span>${movie.show.schedule.days}</span></li>`;
         } else {
             ulElement.innerHTML += `<li id='${movie.show.id}' class='movies-list__item'><div class='movies-list__item-info'><img class="imgElem" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV' alt=${movie.show.name}></div>
-            <span>${movie.show.name}</span></li>`;
+            <span>${movie.show.name}</span>
+            <span>${movie.show.schedule.days}</span></li>`;
         }
-        addListeners();
+        // addListeners();
     }
 }
 // Add listeners to liList
@@ -65,7 +88,7 @@ function getMovieObject(id) {
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
     const switchColor = evt.currentTarget;
-    switchColor.setAttribute('class', 'switch')
+    switchColor.setAttribute('class', 'switch');
     const object = getMovieObject(selected);
     /* Compare ids of selectedMovies with general data*/
     const findMovie = selectedMovies.find(movies => parseInt(movies.id) === parseInt(selected));
@@ -78,10 +101,12 @@ function selectMovie(evt) {
     }
 }
 
+
 // Show in document favourite Show
 function renderFavourites(favArr) {
     ulFav.innerHTML = '';
     for (let favourite of favArr) {
+        
         const li = document.createElement('li');
         const i = document.createElement('i');
         const div = document.createElement('div');
@@ -104,7 +129,6 @@ function renderFavourites(favArr) {
 
         //Image name
         span.appendChild(text);
-
 
         //Container of img
         div.setAttribute('class', 'movies-list__item-info');
@@ -136,7 +160,6 @@ function removeMovie(evt) {
     const searchCorrectId = selectedMovies.find(item => item.id == (Number(elemId)));
     let fav = selectedMovies.indexOf(searchCorrectId);
     selectedMovies.splice(fav, 1);
-    // const ulElementChild = document.querySelectorAll('.movies-list__item')
     for (let element of ulElementChild) {
         if (elemId === element.id) {
             element.classList.remove('switch');
@@ -147,7 +170,6 @@ function removeMovie(evt) {
     renderFavourites(selectedMovies);
 }
 
-
 button.addEventListener('click', loadSeries);
-
-renderFavourites(selectedMovies)
+showFavourite ();
+renderFavourites(selectedMovies);
