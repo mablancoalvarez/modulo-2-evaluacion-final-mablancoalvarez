@@ -65,7 +65,7 @@ function getMovieObject(id) {
 function selectMovie(evt) {
     const selected = evt.currentTarget.id;
     const switchColor = evt.currentTarget;
-    switchColor.setAttribute('class', 'switch')
+    switchColor.setAttribute('class', 'switch black')
     const object = getMovieObject(selected);
     /* Compare ids of selectedMovies with general data*/
     const findMovie = selectedMovies.find(movies => parseInt(movies.id) === parseInt(selected));
@@ -136,15 +136,11 @@ function removeMovie(evt) {
     const searchCorrectId = selectedMovies.find(item => item.id == (Number(elemId)));
     let fav = selectedMovies.indexOf(searchCorrectId);
     selectedMovies.splice(fav, 1);
-    // const ulElementChild = document.querySelectorAll('.movies-list__item')
-    for (let element of ulElementChild) {
-        if (elemId === element.id) {
-            element.classList.remove('switch');
-            element.classList.add('white');
-        }
-    }
     setLocalStorage();
     renderFavourites(selectedMovies);
+    const element = document.getElementById(elemId);
+    element.classList.remove('black');
+    element.classList.add('white');
 }
 
 
